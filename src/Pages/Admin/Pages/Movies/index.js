@@ -99,6 +99,23 @@ export const MoviesAdmin = () => {
         })
     }
 
+    const searchHandler = async (e) => {
+        e.preventDefault()
+        const search = e.target.value
+        axios({
+            method: 'GET',
+            url: `${process.env.REACT_APP_URL_API}/movies?q=${search}`,
+        }).then(res => {
+            setMovies({
+                loading: false,
+                results: res.data,
+            })
+            // console.log(res.data)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
 
     const handleMovie = async (e) => {
         e.preventDefault()
@@ -189,7 +206,7 @@ export const MoviesAdmin = () => {
                                 <div className='card-body'>
                                     <div className="search-box">
                                         <button className="btn-search"><i className="fas fa-search"></i></button>
-                                        <input type="text" className="input-search" placeholder="Type to Search..." />
+                                        <input type="text" className="input-search" onChange={(e) => searchHandler(e)} placeholder="Type to Search..." />
                                     </div>
                                     <div className='table-responsive'>
                                         <table className='table table-striped table-hover'>
