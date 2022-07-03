@@ -1,0 +1,142 @@
+.img-b-1 {
+  padding-top: 66px;
+}
+
+.img-b-2 {
+  padding-top: 36px;
+}
+
+.img-b-3 {
+  padding-top: 6px;
+}
+
+.img-banner-all {
+  width: 70%;
+  filter: drop-shadow(5px 5px 5px #222);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3));
+}
+
+.text-banner {
+  margin: 165px 0px 120px 0px;
+  font-size: 50px;
+  line-height: 60px;
+  font-weight: bold;
+  color: #5f2eea;
+}
+
+.text-banner::first-line {
+  color: #a0a3bd;
+  font-size: 22px;
+  font-weight: normal;
+}
+
+.col-banner {
+  margin: 0px -35px 0px 0px;
+}
+
+.now-showing {
+  background: #f5f6f8;
+  padding: 40px 20px;
+}
+
+.cards-movie {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.cards-movie::-webkit-scrollbar {
+  display: none;
+}
+
+.card-movie {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid white;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.scrollmonth {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.scrollmonth::-webkit-scrollbar {
+  display: none;
+}
+
+.text-nowshowing {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Query Mobile and Tables device */
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 767px) {
+  .querydevice {
+    margin-top: 30px;
+    margin-bottom: 70px;
+  }
+
+  .banner-mobile {
+    width: 100%;
+    /* margin-top: 30px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .text-banner {
+    /* margin: 110px 0px 120px 0px; */
+    margin: 0;
+    font-size: 40px;
+    line-height: 40px;
+  }
+  .text-banner::first-line {
+    color: #a0a3bd;
+    font-size: 14px;
+    font-weight: normal;
+  }
+  .col-banner {
+    width: 38%;
+  }
+
+  .card-movie-list {
+    max-width: 90px;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .text-banner {
+    margin: 110px 0px 120px 0px;
+  }
+  .card-movie-list {
+    max-width: 110px;
+  }
+}
+/*  Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .querydevice {
+    margin-top: 30px;
+    margin-bottom: 70px;
+  }
+  .cards-movie {
+    margin-left: 50px;
+    margin-right: 40px;
+  }
+  .card-movie-list-dekstop {
+    width: 90%;
+  }
+  .text-nowshowing {
+    display: inline-block;
+    padding-bottom: 9px;
+    /* to give some gap between text and border */
+    background: linear-gradient(to right, #5f2eea, #5f2eea);
+    background-repeat: no-repeat;
+    background-size: 80px 3px;
+    background-position: 50% 100%;
+  }
+}

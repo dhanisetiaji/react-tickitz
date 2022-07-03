@@ -1,13 +1,198 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Mulish", sans-serif;
+  color: #333;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  font-family: "Mulish", sans-serif;
+}
+
+/* nav */
+.nav-link {
+  color: black;
+  text-decoration: none;
+}
+
+.nav-item {
+  margin: 0px 25px;
+}
+
+.navbar-brand {
+  margin-right: 20px;
+}
+
+.nav-link:hover {
+  color: black;
+}
+
+/* button */
+.btn-primary {
+  background-color: #5f2eea;
+  border-color: #5f2eea;
+  padding: 6px 17px;
+  font-size: small;
+}
+
+.btn-primary:hover {
+  background-color: #2a00a2;
+}
+
+.btn-outline-secondary {
+  color: #5f2eea;
+  border-color: #5f2eea;
+  padding: 6px 17px;
+  font-size: small;
+}
+
+.btn-outline-secondary:hover {
+  background-color: transparent;
+  color: #2a00a2;
+  border-color: #2a00a2;
+}
+
+.btn-outline-secondary:active {
+  background-color: transparent;
+  color: #2a00a2;
+  border-color: #2a00a2;
+}
+
+.btn-outline-secondary:active:focus {
+  background-color: transparent;
+  color: #2a00a2;
+  border-color: #2a00a2;
+}
+.btn-check:focus + .btn,
+.btn:focus {
+  box-shadow: none;
+}
+.btn-check:active + .btn-outline-secondary:focus,
+.btn-check:checked + .btn-outline-secondary:focus,
+.btn-outline-secondary.active:focus,
+.btn-outline-secondary.dropdown-toggle.show:focus,
+.btn-outline-secondary:active:focus {
+  box-shadow: none;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* shadow */
+.shadow {
+  box-shadow: 6px 12px 35px 6px rgba(0, 0, 0, 0.11);
+  -webkit-box-shadow: 6px 12px 35px 6px rgba(0, 0, 0, 0.11);
+  -moz-box-shadow: 6px 12px 35px 6px rgba(0, 0, 0, 0.11);
+}
+
+/* Other */
+
+/* Query Media */
+@media (max-width: 767px) {
+  #sign-up {
+    display: none;
+  }
+  .search-dekstop,
+  .profile-dekstop {
+    display: none !important;
+  }
+
+  .footernav {
+    padding: 35px 0px !important;
+    color: #6e7191;
+    font-size: 13px;
+  }
+  .nav-item {
+    border-top: 0.5px solid #dedede;
+    text-align: center;
+    padding: 10px 0px;
+    margin: 0px;
+  }
+  .bottom-text::after {
+    display: none;
+  }
+  .text-upcoming {
+    font-size: 17px;
+  }
+
+  .navbar-nav {
+    margin-top: 20px;
+  }
+  .navbar-toggler:focus {
+    box-shadow: none;
+    border: none;
+  }
+  .navbar-toggler {
+    border: none;
+  }
+  .card-movie-list {
+    max-width: 90px;
+  }
+  .card-join p {
+    margin: 0px 0px;
+  }
+  .card-join form button {
+    width: 100%;
+    padding: 10px;
+  }
+  .button-join {
+    width: 85%;
+    margin: 5px 0px;
+  }
+  input#joining {
+    padding: 12px 20px;
+    width: 83%;
+    margin-bottom: 10px;
+  }
+  .input-search-mobile {
+    text-align: -webkit-center !important;
+  }
+  .list-view-card {
+    margin: 10px 0px;
+    width: 50%;
+  }
+  .list-view {
+    background: none;
+    padding: 0;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+  #sign-up {
+    display: none;
+  }
+  .search-dekstop,
+  .profile-dekstop {
+    display: none !important;
+  }
+  .navbar-toggler:focus {
+    box-shadow: none;
+  }
+
+  .nav-item {
+    border-top: 0.5px solid #dedede;
+    text-align: center;
+    padding: 10px 0px;
+    margin: 0px;
+  }
+
+  .navbar-nav {
+    margin-top: 20px;
+  }
+  .footernav {
+    padding: 35px 0px !important;
+  }
+}
+/*  Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  #profile,
+  #logout,
+  #search-mobile,
+  #sign-in {
+    display: none;
+  }
+
+  .footernav {
+    display: none;
+  }
 }
