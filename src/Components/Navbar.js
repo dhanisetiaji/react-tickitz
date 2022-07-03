@@ -30,7 +30,7 @@ export const Navbar = () => {
               </li>
             </ul>
             <form className="d-flex">
-              <button className="btn btn-primary" id="sign-up" type="submit"><Link to={'/admin'} className="text-decoration-none text-white">Sign Up</Link></button>
+              <Link to={'/admin'} className="text-decoration-none text-white"><button className="btn btn-primary" id="sign-up" type="submit">Sign Up</button></Link>
             </form>
           </div>
         </div>
