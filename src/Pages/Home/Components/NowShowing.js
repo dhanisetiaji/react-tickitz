@@ -1,35 +1,37 @@
-import axios from 'axios'
+import LoaderMovie from '../../../Components/LoaderMovie';
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom'
+import moment from 'moment'
+import { GetMoviesDate } from "../../../redux/actions/Movies"
+
 
 
 
 export const NowShowing = () => {
-    const [movieSchedule, setMovieSchedule] = useState({
-        loading: false,
-        results: {
-            data: []
-        }
-    })
+    const dispatch = useDispatch();
+
+    const { getMovieNowShowing, loading } = useSelector((state) => state.movies);
 
     useEffect(() => {
-        setMovieSchedule((prevState) => ({
-            ...prevState,
-            loading: true
-        }))
-        axios({
-            method: 'GET',
-            url: 'https://test.dhanz.me/api/v1/movies',
-        }).then((res) => {
-            setMovieSchedule({
-                loading: false,
-                results: res.data
-            })
-        })
-            .catch((err) => {
-                console.log(err)
-            })
-    }, [])
+        const now = moment().format('MM-DD')
+        dispatch(GetMoviesDate(now))
+    }, [dispatch])
+
+    const showContent = (id) => {
+        document.getElementById(`show${id}`).style.display = 'block'
+    }
+    const hideContent = (id) => {
+        document.getElementById(`show${id}`).style.display = 'none'
+    }
+    const showHide = (id) => {
+        const show = document.getElementById(`show${id}`)
+        if (show.style.display === 'block') {
+            show.style.display = 'none'
+        } else {
+            show.style.display = 'block'
+        }
+    }
 
     return (
         <div className="now-showing">
@@ -40,21 +42,33 @@ export const NowShowing = () => {
                     </div>
                     <div className="col-6 text-end">
                         <Link to={"/movies"} className="fw-bolder text-decoration-none">view all</Link>
+
                     </div>
                 </div>
             </div>
             <div className="cards-movie">
-                {movieSchedule.results.data.map((movie, index) => {
+                {loading ? <LoaderMovie /> : getMovieNowShowing.results.map((movie, index) => {
                     return (
-                        <div className="card-movie" key={index}>
-                            <img className="card-movie-list"
+                        <div className="card-movie" onMouseOver={() => showContent(movie.id)} onMouseLeave={() => hideContent(movie.id)} key={index}>
+                            <img onClick={() => showHide(movie.id)} className="card-movie-list"
                                 src={`${process.env.REACT_APP_URL_IMG}/${movie.image}`} alt={movie.title} title={movie.title} />
+                            <div className={`description-upcoming text-center`} id={`show${movie.id}`} style={{ display: "none" }}>
+                                <div className="row">
+                                    <div className="col-12 description-padding">
+                                        <h6>{movie.title}</h6>
+                                        <p>{movie.genre}</p>
+                                    </div>
+                                    <div className="col-12 btn-nowshowing">
+                                        <Link type="button" to={`/detail/${movie.id}`} className="btn btn-outline-secondary btn-full">Details</Link>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
                     )
                 })}
 
             </div>
-        </div>
+        </div >
     )
 }
+

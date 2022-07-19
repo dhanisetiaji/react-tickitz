@@ -1,0 +1,87 @@
+.detail-movie-item {
+  margin-bottom: 5px !important;
+}
+.detail-movie-title-center {
+  text-align: left;
+  margin-top: 10px;
+}
+.detail {
+  margin: 50px 0px;
+}
+
+.title-detail {
+  color: black !important;
+  font-weight: bolder;
+}
+
+.genre-detail {
+  color: #a0a3bd;
+  font-size: 18px;
+}
+
+.text-detail {
+  font-size: 14px;
+  color: #8692a6;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 15px 0px;
+}
+
+.text-detail-desc {
+  color: #121212;
+  font-weight: 400;
+  line-height: 32px;
+  font-size: 16px;
+}
+
+.synopsis {
+  color: black;
+  font-weight: bolder;
+}
+
+.synopsis-detail {
+  color: #4e4b66;
+  font-weight: 400;
+  line-height: 32px;
+  font-size: 16px;
+  text-align: justify;
+}
+
+.showtime-ticket {
+  background: #f5f6f8;
+  padding: 30px 0px;
+}
+
+.showtime-title {
+  color: #14142b;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.card-img-rounded {
+  border: 0.5px solid #dedede;
+  padding: 50px;
+  border-radius: 15px;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 767px) {
+  .detail-movie-title-center {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .detail-movie-img {
+    text-align: center;
+  }
+  .card-img-rounded {
+    padding: 20px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .card-img-rounded {
+    padding: 20px;
+  }
+}

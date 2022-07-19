@@ -1,7 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useDispatch } from "react-redux";
+import { AuthLogout } from '../../../redux/actions/Auth';
+
 
 export const Navbar = () => {
+    const dispatch = useDispatch();
+
     return (
         <>
             <nav className="navbar navbar-expand-lg mt-2 mb-5">
@@ -26,7 +31,7 @@ export const Navbar = () => {
                                 <Link to={"/admin/cinema"} className="nav-link bottom-text" id="admin">Cinema</Link>
                             </li>
                             <li className="nav-item">
-                                <Link to={"/auth/signin"} className="nav-link bottom-text" id="admin">Logout</Link>
+                                <span onClick={() => dispatch(AuthLogout())} className="nav-link bottom-text" id="admin">Logout</span>
                             </li>
                             <li className="nav-item footernav">
                                 <span> &copy; 2022 Tickitz. All Right Reserved. </span>
@@ -42,7 +47,7 @@ export const Navbar = () => {
                             </a>
                             <ul className="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownCenterBtn">
                                 <li><Link to={'/admin/profile'} className="dropdown-item">Profile</Link></li>
-                                <li><Link to={'/logout'} className="dropdown-item">Logout</Link></li>
+                                <li><span onClick={() => dispatch(AuthLogout())} className="dropdown-item">Logout</span></li>
                             </ul>
                         </div>
                     </div>

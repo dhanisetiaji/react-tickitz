@@ -1,5 +1,7 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from "react-redux";
+import { AddMovies, DeleteMovie, EditMovies, GetMovies } from "../../../../redux/actions/Movies"
+import { useSearchParams } from "react-router-dom"
 import MetaTags from '../../Component/Metatags'
 import { Navbar } from '../../Component/NavbarAdmin'
 import { Sidebar } from '../../Component/Sidebar'
@@ -7,62 +9,68 @@ import Swal from 'sweetalert2'
 import moment from 'moment'
 
 export const MoviesAdmin = () => {
-    const [movies, setMovies] = useState({
-        loading: true,
-        results: {
-            data: []
-        },
+    const dispatch = useDispatch();
+    const [query, setQuery] = useSearchParams()
+
+    const [params, setParams] = useState({
+        page: query.get('page') ?? 1,
+        limit: 5,
     })
-    const [refetch, setRefetch] = useState(false)
+
     const [formData, setFormData] = useState({
-        id: '',
-        title: "",
-        genre: "",
-        release_date: "",
-        directed_by: "",
-        duration: "",
-        cast: "",
-        synopsis: "",
-        image: "",
+        title: '',
+        synopsis: '',
+        release_date: '',
+        genre: '',
+        duration: '',
+        directed_by: '',
+        cast: '',
     })
+
+    const bodyFormData = new FormData()
+    // Object.keys(formData).forEach(key => bodyFormData.append(key, formData[key]))
+    bodyFormData.set('title', formData.title)
+    bodyFormData.set('genre', formData.genre)
+    bodyFormData.set('release_date', formData.release_date)
+    bodyFormData.set('directed_by', formData.directed_by)
+    bodyFormData.set('duration', formData.duration)
+    bodyFormData.set('cast', formData.cast)
+    bodyFormData.set('synopsis', formData.synopsis)
+    bodyFormData.set('image', formData.image)
+    // for (const value of bodyFormData.values()) {
+    //     console.log(value);
+    // }
+    // console.log(bodyFormData)
+    const { getMovieList, loading } = useSelector((state) => state.movies);
+    const { MovieCUD } = useSelector((state) => state.movies);
+    const { GetAuth } = useSelector((state) => state.auth);
 
     useEffect(() => {
+        dispatch(GetMovies(params))
+    }, [dispatch, params, MovieCUD]) // eslint-disable-line
 
-        setMovies((prevState) => ({
-            ...prevState,
-            loading: true
-        }))
 
-        axios({
-            method: 'get',
-            url: `${process.env.REACT_APP_URL_API}/movies`,
-        }).then(res => {
-            setMovies({
-                loading: false,
-                results: res.data,
-            })
 
-        }).catch(err => {
-            console.log(err)
-        })
-    }, [refetch])
+    let totalPage = Array(getMovieList.totalPage).fill() ?? []
 
     const addmovie = async () => {
         document.getElementById('modal-title').innerHTML = 'Add Movie'
+        // document.getElementById('InputImage').get(0).reset()
+        // document.getElementById('InputImage').get(0).value = ''
         setFormData({
-            title: "",
-            genre: "",
-            release_date: "",
-            directed_by: "",
-            duration: "",
-            cast: "",
-            synopsis: "",
-            image: "",
+            title: '',
+            synopsis: '',
+            release_date: '',
+            genre: '',
+            duration: '',
+            directed_by: '',
+            cast: '',
         })
 
     }
 
     const editmovie = async (movie) => {
+        // console.log(movie)
         document.getElementById('modal-title').innerHTML = 'Edit Movie'
         setFormData({
             ...movie,
@@ -72,100 +80,29 @@ export const MoviesAdmin = () => {
     }
 
     const deletemovie = async (id) => {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axios({
-                    method: 'delete',
-                    url: `${process.env.REACT_APP_URL_API}/movies/${id}`,
-                }).then(res => {
-                    Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    )
-                    setRefetch(!refetch)
-                }).catch(err => {
-                    console.log(err)
-                })
-            }
-        })
+        dispatch(DeleteMovie(GetAuth.data.token, id))
     }
 
     const searchHandler = async (e) => {
         e.preventDefault()
         const search = e.target.value
-        axios({
-            method: 'GET',
-            url: `${process.env.REACT_APP_URL_API}/movies?q=${search}`,
-        }).then(res => {
-            setMovies({
-                loading: false,
-                results: res.data,
-            })
-            // console.log(res.data)
-        }).catch(err => {
-            console.log(err)
+        setParams({
+            ...params,
+            q: search,
         })
     }
 
 
     const handleMovie = async (e) => {
         e.preventDefault()
+
         try {
             if (!formData.id) {
-                const result = await axios({
-                    method: 'POST',
-                    url: `${process.env.REACT_APP_URL_API}/movies`,
-                    data: formData,
-                })
-                if (result.data.status === 200) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: `${result.data.message}`,
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                    setRefetch(!refetch)
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: `${result.data.message}`,
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
-
+                dispatch(AddMovies(GetAuth.data.token, bodyFormData))
+                // setRefetch(!refetch)
             }
             else {
-                const result = await axios({
-                    method: 'PATCH',
-                    url: `${process.env.REACT_APP_URL_API}/movies/${formData.id}`,
-                    data: formData,
-                })
-                if (result.data.status === 200) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: `${result.data.message}`,
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                    setRefetch(!refetch)
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: `${result.data.message}`,
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
+                dispatch(EditMovies(GetAuth.data.token, bodyFormData, formData.id))
 
             }
 
@@ -181,6 +118,11 @@ export const MoviesAdmin = () => {
 
     }
 
+    const handlePaginate = (page) => {
+        setParams((prevState) => ({ ...prevState, page }))
+        query.set('page', page)
+        setQuery(query)
+    }
 
 
     return (<>
@@ -212,7 +154,6 @@ export const MoviesAdmin = () => {
                                         <table className='table table-striped table-hover'>
                                             <thead>
                                                 <tr>
-                                                    <th scope='col'>#</th>
                                                     <th scope='col'>Title</th>
                                                     <th scope='col'>Genre</th>
                                                     <th scope='col'>Duration</th>
@@ -221,9 +162,8 @@ export const MoviesAdmin = () => {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {movies.loading ? <tr><td colSpan='6' className='text-center'>Loading...</td></tr> : !movies.results.data.length ? <tr><td colSpan='6' className='text-center'>Empty Data</td></tr> : movies.results.data.map((movie, index) => {
+                                                {loading ? <tr><td colSpan='6' className='text-center'>Loading...</td></tr> : !getMovieList.results.length ? <tr><td colSpan='6' className='text-center'>Empty Data</td></tr> : getMovieList.results.map((movie, index) => {
                                                     return (<tr key={index}>
-                                                        <th scope='row'>{index + 1}</th>
                                                         <td>{movie.title}</td>
                                                         <td>{movie.genre}</td>
                                                         <td>{movie.duration}</td>
@@ -238,6 +178,19 @@ export const MoviesAdmin = () => {
                                                 })}
                                             </tbody>
                                         </table>
+                                        <nav aria-label="pagination">
+                                            <ul className="pagination justify-content-center">
+                                                {totalPage.map((item, index) => {
+                                                    let number = index + 1
+                                                    let page = parseInt(params.page)
+                                                    return (
+                                                        <li className={page === number ? 'page-item active' : 'page-item'} key={index}>
+                                                            <button className="page-link" onClick={() => handlePaginate(number)}>{number}</button>
+                                                        </li>
+                                                    )
+                                                })}
+                                            </ul>
+                                        </nav>
                                     </div>
                                 </div>
                             </div>
@@ -253,7 +206,7 @@ export const MoviesAdmin = () => {
                         <h5 className="modal-title" id="modal-title">Modal title</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form id='form' onSubmit={(e) => handleMovie(e)}>
+                    <form id='form' encType='multipart/form-data' onSubmit={(e) => handleMovie(e)}>
                         <div className="modal-body">
                             <div className="mb-3">
                                 <label htmlFor="InputTitle" className="form-label">Title</label>
@@ -263,8 +216,8 @@ export const MoviesAdmin = () => {
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="InputImage" className="form-label">image</label>
-                                <input type="text" className="form-control" id="InputImage" value={formData.image} onChange={(e) => {
-                                    setFormData(prevState => ({ ...prevState, image: e.target.value }))
+                                <input type="file" className="form-control" id="InputImage" onChange={(e) => {
+                                    setFormData(prevState => ({ ...prevState, image: e.target.files[0] }))
                                 }} />
                             </div>
                             <div className="mb-3">

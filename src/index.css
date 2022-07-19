@@ -86,6 +86,64 @@ body {
 
 /* Other */
 
+.footers {
+  color: #6e7191;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0.75px;
+  line-height: 20px;
+  padding-top: 30px;
+}
+.footers h6 {
+  font-weight: 700;
+  font-size: 16px;
+  color: black;
+}
+
+.footers p {
+  font-size: 13px;
+  line-height: 32px;
+  /* or 200% */
+
+  letter-spacing: 0.75px;
+}
+
+.footer {
+  margin-top: 10px;
+}
+
+.footer-ul {
+  margin: 10px 5px;
+  padding: 0;
+}
+
+.footer-ul a {
+  color: #6e7191;
+  text-decoration: none;
+}
+
+.footer-ul img {
+  margin: 10px 0px;
+}
+
+.footer-ul-item {
+  line-height: 35px;
+}
+
+.page-item.active .page-link {
+  background-color: #5f2eea;
+  border-color: #5f2eea;
+  color: white;
+}
+
+.page-item {
+  margin: 0px 3px;
+}
+
+.page-item a {
+  color: #000;
+}
+
 /* Query Media */
 @media (max-width: 767px) {
   #sign-up {

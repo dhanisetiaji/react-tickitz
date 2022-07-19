@@ -1,0 +1,32 @@
+.viewall {
+  background: #e5e5e5;
+  color: black;
+  padding: 45px 0px;
+}
+.list-view {
+  background: #fff;
+  padding: 60px;
+  margin: 25px 0px;
+}
+
+.list-view-card {
+  margin: 10px 0px;
+}
+
+@media (max-width: 767px) {
+  .list-view-card {
+    margin: 10px 0px;
+    width: 50%;
+  }
+  .list-view {
+    background: none;
+    padding: 0;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .list-view-card {
+    margin: 10px 0px;
+    width: 25%;
+  }
+}

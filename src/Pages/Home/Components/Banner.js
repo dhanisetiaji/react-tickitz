@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Banner = () => {
     return (
-        <div className="container">
+        <div className="container mt-3">
             <div className="row querydevice">
                 <div className="col-md-6">
                     <p className="text-banner">Nearest Cinema, Newest Movie,<br /> Find out now!</p>

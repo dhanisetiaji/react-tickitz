@@ -1,0 +1,83 @@
+.auths {
+  color: #4e4b66;
+}
+/* .auth-card {
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(43, 21, 107, 0.8939950980392157) 0%
+    ),
+    url("/img/background-sign.png");
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+} */
+.auth-card {
+  overflow: hidden !important;
+}
+.auths {
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}
+
+.auth-cardf-item {
+  position: relative;
+  padding: 65px 120px 80px 20px;
+}
+
+.auth-cardf-item img {
+  width: 30%;
+}
+
+.auth-cardf-auth {
+  padding-top: 60px;
+  font-size: 48px;
+  line-height: 58px;
+  letter-spacing: 0.003em;
+  color: rgb(255, 255, 255);
+}
+
+.auth-cardf-auth-desc {
+  color: rgb(223, 219, 219);
+  font-size: 24px;
+  line-height: 30px;
+  padding-right: 50px;
+}
+
+.auth-card-item {
+  position: relative;
+  top: 33.33vh;
+  bottom: 33.33vh;
+}
+.auth-card-auth {
+  font-size: 48px;
+  line-height: 58px;
+  letter-spacing: 0.003em;
+  color: rgba(255, 255, 255, 0.8);
+}
+.auth-card-item img {
+  width: 70%;
+}
+.auth-card-title {
+  color: #000 !important;
+  font-weight: bold;
+}
+.auth-card-subtitle {
+  color: #8692a6;
+  font-size: 18px;
+  line-height: 25px;
+}
+
+.auths-card {
+  display: flex;
+  align-items: center;
+  padding: 40px;
+  justify-content: center;
+}
+
+#eye-pass {
+  float: right;
+  margin-right: 13px;
+  margin-top: -40px;
+  position: relative;
+}
