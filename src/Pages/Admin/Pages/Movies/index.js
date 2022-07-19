@@ -15,6 +15,7 @@ export const MoviesAdmin = () => {
     const [params, setParams] = useState({
         page: query.get('page') ?? 1,
         limit: 5,
+        orderBy: 'asc'
     })
 
     const [formData, setFormData] = useState({
