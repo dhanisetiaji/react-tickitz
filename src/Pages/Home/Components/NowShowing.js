@@ -1,5 +1,5 @@
 import LoaderMovie from '../../../Components/LoaderMovie';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom'
 import moment from 'moment'
@@ -11,7 +11,7 @@ import { GetMoviesDate } from "../../../redux/actions/Movies"
 export const NowShowing = () => {
     const dispatch = useDispatch();
 
-    const { getMovieNowShowing, loading } = useSelector((state) => state.movies);
+    const { getMovieList, loading } = useSelector((state) => state.movies);
 
     useEffect(() => {
         const now = moment().format('MM-DD')
@@ -47,7 +47,7 @@ export const NowShowing = () => {
                 </div>
             </div>
             <div className="cards-movie">
-                {loading ? <LoaderMovie /> : getMovieNowShowing.results.map((movie, index) => {
+                {loading ? <LoaderMovie /> : getMovieList.results.map((movie, index) => {
                     return (
                         <div className="card-movie" onMouseOver={() => showContent(movie.id)} onMouseLeave={() => hideContent(movie.id)} key={index}>
                             <img onClick={() => showHide(movie.id)} className="card-movie-list"
